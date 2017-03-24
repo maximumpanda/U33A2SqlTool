@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using U33A2SQLTool.SQL.BaseTypes;
 using U33A2SQLTool.SQL.Statements;
 
@@ -20,19 +19,6 @@ namespace U33A2SQLTool.SQL_Tools {
         public void AddTable(string name, SqlObject type) {
             RunNonQuery(SqlStatementBuilder.BuildCreateTable(name, type));
             DatabaseModel.Tables.Add(type);
-        }
-        public uint GetId(SqlObject model, string field, string value) {
-            string select = new Statement().Select("*").From(model).Where(field, "=", value) + ";";
-            SqlCollection results = RunQuery(select);
-            return (uint) results.Rows.First()["Id"].Value;
-        }
-        private uint GetIdByValue(string table, string column, string value) {
-            return
-                (uint)
-                RunQuery(SqlStatementBuilder.BuildSelect("Id", table, table, column, value)).Rows.First()["Id"].Value;
-        }
-        private ushort GetRegionId(string name) {
-            return (ushort) GetIdByValue("Regions", "Name", name);
         }
         public void Insert(string statement) {
             RunNonQuery(statement);
@@ -77,8 +63,8 @@ namespace U33A2SQLTool.SQL_Tools {
             SqlCollection results = query.RunQuery(command);
             return results;
         }
-        public SqlCollection Select(SqlObject tableModel, params string[] fiels) {
-            string select = new Statement().Select(string.Join(", ", fiels)).From(tableModel.Name) + ";";
+        public SqlCollection Select(SqlObject tableModel, params string[] fields) {
+            string select = new Statement().Select(string.Join(", ", fields)).From(tableModel.Name) + ";";
             return RunQuery(select);
         }
         public SqlCollection Select<T>() where T : SqlObject {

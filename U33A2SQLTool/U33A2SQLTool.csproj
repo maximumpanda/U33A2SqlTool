@@ -64,7 +64,6 @@
     <Compile Include="SQL\BaseTypes\SqlType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQL Tools\SqlConverter.cs" />
     <Compile Include="SQL Tools\SqlFormatter.cs" />
     <Compile Include="SQL Tools\SqlHelper.cs" />
     <Compile Include="SQL Tools\SqlManager.cs" />
